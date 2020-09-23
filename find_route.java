@@ -44,7 +44,7 @@ class node implements Comparable<node>
     		return nodeChild;
   	}
 
-	@Override // needed to edit compare
+	
 	public int compareTo(node node)
 	{
 		double node_cost = node.nodePathCost;
@@ -92,20 +92,18 @@ public class find_route
 
 		ReadInputFile(inputFile);
 
-    // * * * * * B E G I N    Q U E U E * * * * *
-
-    // Create node representation of set (stirng, parent, g_val, depth)
+       // Create node representation of set (stirng, parent, g_val, depth)
 		node beginning_node = new node(start_state, null, 0, 0);
 
     // Priority set = sorted list of the inputs.  Aka open set
 		priorityqueue.add(beginning_node);
     // Initialize two counters (up above), generated and expanded
 
-    // Priority Queue: [Bremen node] ----> NULL
+    // Priority Queue: [Bremen node] --> NULL
 
 
     // Check if there's any more nodes in the queue or if goal has reached
-          // empty if impossible               end if found goal is filled
+    // empty if impossible               end if found goal is filled
 		while((priorityqueue.isEmpty() == false)  && goal_node == null)
 		{
 
@@ -128,19 +126,19 @@ public class find_route
           // Add to closed array
 					visitedNode.add(temp_parent.get_state());
 
-          int j = 0;
+          			int j = 0;
           // Look at "file" and see if the city apart of any other sets
 					for (String i : inputFileArray)
 					{
             // Child node has been found! (if true)
 						if (i.contains(temp_parent.get_state()))
-            {
-              String[] current_child = inputFileArray.get(j).split("\\s+");
+            					{
+              					String[] current_child = inputFileArray.get(j).split("\\s+");
 
               // * * * * * I N F O R M E D    S E A R C H * * * * *
               if(search_type.equals("inf"))
               {
-                InformedSearch(current_child, temp_parent);
+                InformedSearch(current_child, temp_parent); //Buggy
 							}
               // * * * * * U N I N F O R M E D    S E A R C H * * * * *
 							else if(search_type.equals("uninf"))
