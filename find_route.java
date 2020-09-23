@@ -1,10 +1,15 @@
+/*Name: Kevin Chawla
+  Student ID: 1001543244
+  Net ID: kxc3244
+  */
+
 import java.io.*;
 import java.util.*;
 
 class node implements Comparable<node>
 {
 	public String state;
-  public Integer depth;
+  	public Integer depth;
 	public node parent;
 	public double nodePathCost;
 	public node nodeChild;
@@ -15,7 +20,7 @@ class node implements Comparable<node>
 		this.state = state;
 		this.depth = depth;
 		this.nodePathCost = nodePathCost;
-    this.parent = parent;
+    		this.parent = parent;
 	}
 
 	public String get_state()
@@ -34,27 +39,27 @@ class node implements Comparable<node>
 	{
 		return nodePathCost;
 	}
-  public node get_children()
-  {
-    return nodeChild;
-  }
+  	public node get_children()
+  	{
+    		return nodeChild;
+  	}
 
 	@Override // needed to edit compare
 	public int compareTo(node node)
 	{
 		double node_cost = node.nodePathCost;
 		if (this.nodePathCost > node_cost)
-    {
+    		{
 			return 1;
-    }
+    		}		
 		else if (this.nodePathCost == node_cost)
-    {
+    		{
 			return 0;
-    }
+    		}	
 		else
-    {
+    		{
 			return -1;
-    }
+    		}
 	}
 }
 
@@ -67,79 +72,23 @@ public class find_route
   // Closed set
 	public static ArrayList<String> visitedNode = new ArrayList<String>();
 	public static node goal_node;
-  public static int expanded = 0;
-  public static int generated = 0;
-
-
-
-
-
-
+  	public static int expanded = 0;
+  	public static int generated = 0;
 	public static void main(String[] args)
 	{
-    String inputFile = args[0];
-    String search_type = "uninf";
-    String start_state = args[1];
+    		String inputFile = args[0];
+    		String search_type = "uninf";
+    		String start_state = args[1];
 		String goal_state = args[2];
 		String heuristicFile;
 
 		try{
-			heuristicFile = args[3];
+			heuristicFile = args[2];
 		}
 		finally
 		{
 
-    // Example input: java find_route input1.txt Bremen Kassel h_kassel.txt
-
-		/* U P D A T E D    T O   N O T    I N C L U D E
-    Scanner command_line = new Scanner(System.in);
-    String command_current = command_line.next();
-
-    // find_route
-    if (!command_current.equals("find_route"))
-    {
-      System.exit(0);
-    }
-    command_current = command_line.next();
-    // inf
-    if (command_current.equals("inf"))
-    {
-      search_type = command_current;
-      command_current = command_line.next();
-    }
-    // inputFile
-    inputFile = command_current;
-    command_current = command_line.next();
-    // start
-    start_state = command_current;
-    command_current = command_line.next();
-    // goal
-    goal_state = command_current;
-    command_current = command_line.next();
-    // heuristic
-    if (search_type.equals("inf"))
-    {
-      heuristicFile = command_current;
-    }
-		*/
-
-    /*
-    // HARDCODED
-    inputFile = "input1.txt";
-    //search_type = "inf";
-    start_state = "Bremen";
-    goal_state = "Kassel";
-    heuristicFile = "h_kassel.txt";
-
-    // System.out.println("input commands: " + inputFile + " " + search_type + " " + start_state + " " + goal_state + " " + heuristicFile + "\n");
-
-
-		if(search_type.equals("inf"))
-		{
-			heuristicMap = new LinkedHashMap<String, Double>();
-			ReadHeuristicFile(heuristicFile);
-		}
-		*/
+   
 
 		ReadInputFile(inputFile);
 
@@ -187,9 +136,6 @@ public class find_route
 						if (i.contains(temp_parent.get_state()))
             {
               String[] current_child = inputFileArray.get(j).split("\\s+");
-              // current_child[0] = city1
-              // current_child[1] = city2
-              // current_child[2] = Nodecost
 
               // * * * * * I N F O R M E D    S E A R C H * * * * *
               if(search_type.equals("inf"))
@@ -316,7 +262,7 @@ public static void print()
 {
 
     System.out.println("nodes expanded: " + expanded);
-    System.out.println("nodes generated: " + generated);
+    System.out.println("nodes generated: " + (generated+1));
 
     // Goal is fulfilled and at the end of priorityqueue
 		if (goal_node != null)
